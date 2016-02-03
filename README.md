@@ -5,7 +5,7 @@ lArea v1.0移动端城市选择控件
 在html页面中引入input标签，写法如下：
 ```
 ...
-<input id="demo1" type="text" readonly="" name="input_date" placeholder="城市选择特效"/>
+<input id="demo1" type="text" readonly="" name="input_area" placeholder="城市选择特效"/>
 ...
 ```
 将样式文件引入到页面中：
