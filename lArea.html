@@ -11,43 +11,46 @@
     <title>lArea纯原生js城市选择</title>
     <style type="text/css">
     * {
-    margin: 0;
-    padding: 0;
-    -webkit-appearance: none; //去掉浏览器默认样式
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    -webkit-touch-callout: none;
-    box-sizing: border-box;
-}
-html,
-body {
-    margin: 0 auto;
-    width: 100%;
-    min-height: 100%;
-    overflow-x: hidden;
-    -webkit-user-select: none;
-}
-
-body {
-    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-    -webkit-text-size-adjust: 100%; //关闭自动调整字体
-    -webkit-overflow-scrolling: touch;
-    overflow-scrolling: touch;
-}
-       input{
-            width: 90%;
-    height: 40px;
-    font-size: 18px;
-    border: 1px solid #19b5ee;
-    border-radius: 5px;
+        margin: 0;
+        padding: 0;
+        -webkit-appearance: none; //去掉浏览器默认样式
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        -webkit-touch-callout: none;
+        box-sizing: border-box;
+    }
+    
+    html,
+    body {
+        margin: 0 auto;
+        width: 100%;
+        min-height: 100%;
+        overflow-x: hidden;
+        -webkit-user-select: none;
+    }
+    
+    body {
+        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+        -webkit-text-size-adjust: 100%; //关闭自动调整字体
+        -webkit-overflow-scrolling: touch;
+        overflow-scrolling: touch;
+    }
+    
+    input {
+        width: 90%;
+        height: 40px;
+        font-size: 18px;
+        border: 1px solid #19b5ee;
+        border-radius: 5px;
         margin: 20px 5% 0 5%;
         padding: 5px;
-       }
-    h1{
-    background-color: #19b5ee;
-    color: #fff;
-    font-size: 25px;
-    text-align: center;
-    padding: 10px;
+    }
+    
+    h1 {
+        background-color: #19b5ee;
+        color: #fff;
+        font-size: 25px;
+        text-align: center;
+        padding: 10px;
     }
     </style>
     <link rel="stylesheet" href="css/lArea.css">
@@ -57,18 +60,18 @@ body {
     <div class="demo-content">
         <h1>lArea纯原生js城市选择</h1>
         <div class="content-block">
-            <input id="demo1" type="text" readonly="" name="input_area" placeholder="城市选择特效"/>
+            <input id="demo1" type="text" readonly="" name="input_area" placeholder="城市选择特效" />
         </div>
-    </div>    <!--demo-content-->
+    </div>
+    <!--demo-content-->
     <script src="js/lArea.min.js"></script>
-<script>
-var area = new lArea();
-area.init({
-    'trigger': '#demo1',
-    'data':lAreaData//'js/AreaData.json'
-});
-</script>
-
+    <script>
+    var area = new lArea();
+    area.init({
+        'trigger': '#demo1',
+        'data': lAreaData //'js/AreaData.json'
+    });
+    </script>
 </body>
 
 </html>

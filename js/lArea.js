@@ -228,6 +228,10 @@ window.lArea = (function() {
             var l = item.length;
             var gearChild = _self.gearArea.querySelectorAll(".gear");
             var gearVal = gearChild[_self.index].getAttribute('val');
+            var maxVal=l-1;
+            if(gearVal>maxVal){
+                gearVal=maxVal;
+            }
             gearChild[_self.index].setAttribute('data-len', l);
             if (l > 0) {
                 var id = item[gearVal].id;
