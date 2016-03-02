@@ -8,7 +8,7 @@
     <meta content="black" name="apple-mobile-web-app-status-bar-style">
     <meta content="telephone=no" name="format-detection">
     <meta content="email=no" name="format-detection">
-    <title>lArea纯原生js城市选择</title>
+    <title>移动端城市选择控件</title>
     <style type="text/css">
     * {
         margin: 0;
@@ -56,20 +56,20 @@
     <link rel="stylesheet" href="css/lArea.css">
 </head>
 
-<body class="static">
-    <div class="demo-content">
-        <h1>lArea纯原生js城市选择</h1>
-        <div class="content-block">
+<body>
+    <div>
+        <h1>LArea移动端城市选择控件</h1>
+        <div>
             <input id="demo1" type="text" readonly="" name="input_area" placeholder="城市选择特效" />
         </div>
     </div>
     <!--demo-content-->
-    <script src="js/lArea.min.js"></script>
+    <script src="js/LArea.min.js"></script>
     <script>
-    var area = new lArea();
+    var area = new LArea();
     area.init({
         'trigger': '#demo1',
-        'data': lAreaData //'js/AreaData.json'
+        'data': LAreaData //'js/AreaData.json'
     });
     </script>
 </body>
