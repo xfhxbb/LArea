@@ -1,4 +1,4 @@
-lArea v1.1移动端城市选择控件
+LArea v1.2移动端城市选择控件
 ==========
 纯原生js的移动端城市选择插件，不依赖任何库
 ##用法
@@ -11,28 +11,28 @@ lArea v1.1移动端城市选择控件
 将样式文件引入到页面中：
 ```
 ...
- <link rel="stylesheet" href="css/common/lArea.css">
+ <link rel="stylesheet" href="css/LArea.css">
 ...
 ```
 同时引入js文件到页面中：
 ```
 ...
-<script src="lArea.js"></script>
+<script src="js/LArea.js"></script>
 ...
 ```
 初始化插件：
 ```
 ...
-var area = new lArea();
+var area = new LArea();
 area.init({
     'trigger': '#demo1',//控件ID
-    'data':lAreaData//数组格式数据源，可扩展为自定义数据源
+    'data':LAreaData//数组格式数据源，可扩展为自定义数据源
 });
 ...
 ```
 自定义数据源结构参考：
 ```
-var lAreaData = [{
+var LAreaData = [{
          "id": "2",
          "name": "一级",
          "child": [{
