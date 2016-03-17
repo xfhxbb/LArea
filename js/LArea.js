@@ -333,10 +333,10 @@ window.LArea = (function() {
             var countyVal = parseInt(area_county.getAttribute("val"));
             var countyText = area_county.childNodes[countyVal].textContent;
             var countyCode = area_county.childNodes[countyVal].getAttribute('ref');
-            _self.trigger.value = provinceText + "," + cityText + "," + countyText;
+            _self.trigger.value = provinceText + ((cityText)?(',' + cityText):(''))+ ((countyText)?(',' + countyText):(''));
             _self.value = [provinceVal, cityVal, countyVal];
             if(this.valueTo){
-                this.valueTo.value= provinceCode + "," + cityCode + "," + countyCode;
+                this.valueTo.value= provinceCode +((cityCode)?(',' + cityCode):('')) + ((countyCode)?(',' + countyCode):(''));
             }
             _self.close(e);
         },
