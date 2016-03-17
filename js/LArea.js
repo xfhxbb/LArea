@@ -313,6 +313,9 @@ window.LArea = (function() {
                 _self.setGearTooth(childData);
             } else {
                 gearChild[_self.index].innerHTML = "<div class='tooth'></div>";
+                if(_self.index==1){
+                    gearChild[2].innerHTML = "<div class='tooth'></div>";
+                }
                 _self.index = 0;
             }
         },
