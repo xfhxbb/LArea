@@ -1,5 +1,8 @@
 # 更新日志
 
+## LArea1.6 - 修改于2016年4月6日
+* 改善了插件的样式，修复了城市个数不足导致报错的bug，（感谢网友[song-yuan](https://github.com/song-yuan)提供bug）
+
 ## LArea1.5 - 修改于2016年3月17日
 * 初始化过程完善，增加type、valueTo、keys属性，具体用法参见首页说明
 

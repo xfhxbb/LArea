@@ -305,6 +305,7 @@ window.LArea = (function() {
                 gearChild[_self.index].innerHTML = itemStr;
                 gearChild[_self.index].style["-webkit-transform"] = 'translate3d(0,' + (-gearVal * 2) + 'em,0)';
                 gearChild[_self.index].setAttribute('top', -gearVal * 2 + 'em');
+                gearChild[_self.index].setAttribute('val', gearVal);
                 _self.index++;
                 if (_self.index > 2) {
                     _self.index = 0;
