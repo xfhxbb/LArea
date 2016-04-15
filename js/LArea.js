@@ -3,6 +3,8 @@
  * 
  * 作者：黄磊
  * 
+ * 项目地址：https://github.com/xfhxbb/LArea
+ * 
  * 报告漏洞，意见或建议, 请联系邮箱：xfhxbb@yeah.net
  * 
  * 创建于：2016年2月8日
@@ -147,6 +149,7 @@ window.LArea = (function() {
                 } else {
                     target["o_d_" + target.id] = 0;
                 }
+                target.style.webkitTransitionDuration = target.style.transitionDuration = '0ms';
             }
             //手指移动
             function gearTouchMove(e) {
@@ -161,11 +164,13 @@ window.LArea = (function() {
                 }
                 target["new_" + target.id] = e.targetTouches[0].screenY;
                 target["n_t_" + target.id] = (new Date()).getTime();
-                //var f = (target["new_" + target.id] - target["old_" + target.id]) * 18 / target.clientHeight;
-                var f = (target["new_" + target.id] - target["old_" + target.id]) * 18 / 370;
+                var f = (target["new_" + target.id] - target["old_" + target.id]) * 9 / window.innerHeight;
                 target["pos_" + target.id] = target["o_d_" + target.id] + f;
                 target.style["-webkit-transform"] = 'translate3d(0,' + target["pos_" + target.id] + 'em,0)';
                 target.setAttribute('top', target["pos_" + target.id] + 'em');
+                if(e.targetTouches[0].screenY<1){
+                    gearTouchEnd(e);
+                };
             }
             //离开屏幕
             function gearTouchEnd(e) {
@@ -197,32 +202,28 @@ window.LArea = (function() {
             function rollGear(target) {
                 var d = 0;
                 var stopGear = false;
+                function setDuration() {
+                    target.style.webkitTransitionDuration = target.style.transitionDuration = '200ms';
+                    stopGear = true;
+                }
                 clearInterval(target["int_" + target.id]);
                 target["int_" + target.id] = setInterval(function() {
                     var pos = target["pos_" + target.id];
                     var speed = target["spd_" + target.id] * Math.exp(-0.03 * d);
                     pos += speed;
                     if (Math.abs(speed) > 0.1) {} else {
-                        speed = 0.1;
                         var b = Math.round(pos / 2) * 2;
-                        if (Math.abs(pos - b) < 0.02) {
-                            stopGear = true;
-                        } else {
-                            if (pos > b) {
-                                pos -= speed
-                            } else {
-                                pos += speed
-                            }
-                        }
+                        pos = b;
+                        setDuration();
                     }
                     if (pos > 0) {
                         pos = 0;
-                        stopGear = true;
+                        setDuration();
                     }
                     var minTop = -(target.dataset.len - 1) * 2;
                     if (pos < minTop) {
                         pos = minTop;
-                        stopGear = true;
+                        setDuration();
                     }
                     if (stopGear) {
                         var gearVal = Math.abs(pos) / 2;
