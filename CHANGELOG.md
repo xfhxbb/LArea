@@ -1,5 +1,8 @@
 # 更新日志
 
+## LArea1.71 - 修改于2016年4月26日
+*修复BUG:Cannot read property 'textContent' of undefined
+
 ## LArea1.7 - 修改于2016年4月15日
 * 改善了插件的样式，重新优化了缓动体验，使选中更加流畅
 
