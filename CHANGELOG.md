@@ -1,5 +1,8 @@
 # 更新日志
 
+## LArea1.72 - 修改于2016年6月12日
+* GC少量优化，css少量优化
+
 ## LArea1.71 - 修改于2016年4月26日
 * 修复BUG:Cannot read property 'textContent' of undefined
 

@@ -1,18 +1,17 @@
-/*
- * LArea城市选择控件
+/**
+ * LArea移动端城市选择控件
  * 
- * 作者：黄磊
+ * version:1.7.2
  * 
- * 项目地址：https://github.com/xfhxbb/LArea
+ * author:黄磊
  * 
- * 报告漏洞，意见或建议, 请联系邮箱：xfhxbb@yeah.net
- * 
- * 创建于：2016年2月8日
+ * git:https://github.com/xfhxbb/LArea
  * 
  * Copyright 2016
- *
- * 获得使用本类库的许可, 您必须保留著作权声明信息。
- *
+ * 
+ * Licensed under MIT
+ * 
+ * 最近修改于： 2016-6-12 16:47:41
  */
 window.LArea = (function() {
     var MobileArea = function() {
@@ -164,7 +163,7 @@ window.LArea = (function() {
                 }
                 target["new_" + target.id] = e.targetTouches[0].screenY;
                 target["n_t_" + target.id] = (new Date()).getTime();
-                var f = (target["new_" + target.id] - target["old_" + target.id]) * 9 / window.innerHeight;
+                var f = (target["new_" + target.id] - target["old_" + target.id]) * 30 / window.innerHeight;
                 target["pos_" + target.id] = target["o_d_" + target.id] + f;
                 target.style["-webkit-transform"] = 'translate3d(0,' + target["pos_" + target.id] + 'em,0)';
                 target.setAttribute('top', target["pos_" + target.id] + 'em');
@@ -350,6 +349,7 @@ window.LArea = (function() {
             var evt = new CustomEvent('input');
             _self.trigger.dispatchEvent(evt);
             document.body.removeChild(_self.gearArea);
+            _self.gearArea=null;
         }
     }
     return MobileArea;
