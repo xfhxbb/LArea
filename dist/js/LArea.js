@@ -12,6 +12,10 @@
  * Licensed under MIT
  * 
  * 最近修改于： 2016-6-12 16:47:41
+ *
+ * author: Nutlee
+ *
+ * 最近修改于： 2016-8-30
  */
 window.LArea = (function() {
     var MobileArea = function() {
@@ -38,6 +42,8 @@ window.LArea = (function() {
                     break;
             }
             this.bindEvent();
+            this.successCallBack = params.successCallBack || function(){};
+            return this;
         },
         getData: function(callback) {
             var _self = this;
@@ -103,6 +109,10 @@ window.LArea = (function() {
                 var area_province = _self.gearArea.querySelector(".area_province");
                 var area_city = _self.gearArea.querySelector(".area_city");
                 var area_county = _self.gearArea.querySelector(".area_county");
+                _self.gearArea.addEventListener('click',function(e){
+                    e.target.removeEventListener(e.type,arguments.callee);
+                    return gearTouchOut(e,document.querySelector('.area_ctrl'));
+                }); 
                 area_province.addEventListener('touchstart', gearTouchStart);
                 area_city.addEventListener('touchstart', gearTouchStart);
                 area_county.addEventListener('touchstart', gearTouchStart);
@@ -263,8 +273,26 @@ window.LArea = (function() {
                              break;
                      }
                 }
-                
             }
+            function gearTouchOut(event,parent) {
+                function hasThisElement(child,parent) {
+                    if (parent === child) {
+                        return true;
+                    };
+                    var nodes = parent.getElementsByTagName('*');
+                    for (var i = 0,len = nodes.length; i < len; i++) {
+                        if (nodes[i] === child) {
+                            return true;
+                        };
+                    };
+                    return false;
+                };
+                var event = event ? event :window.event;
+                    target = event.target || event.scrElement;
+                if (!hasThisElement(target,parent)) {
+                    _self.close(event);
+                }
+            };
             _self.getData(function() {
                 _self.trigger.addEventListener('click', popupArea);
             });
@@ -341,6 +369,7 @@ window.LArea = (function() {
             if(this.valueTo){
                 this.valueTo.value= provinceCode +((cityCode)?(',' + cityCode):('')) + ((countyCode)?(',' + countyCode):(''));
             }
+            _self.successCallBack(_self.value,_self.trigger.value);
             _self.close(e);
         },
         close: function(e) {
