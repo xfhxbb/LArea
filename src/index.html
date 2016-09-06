@@ -81,7 +81,11 @@
             name: 'name'
         }, //绑定数据源相关字段 id对应valueTo的value属性输出 name对应trigger的value属性输出
         'type': 1, //数据源类型
-        'data': LAreaData //数据源
+        'data': LAreaData, //数据源
+        'successCallBack':function(value,valueTo){
+            console.log(value);
+            console.log(valueTo);
+        }
     });
     area1.value=[1,13,3];//控制初始位置，注意：该方法并不会影响到input的value
     var area2 = new LArea();
@@ -93,7 +97,11 @@
             name: 'text'
         },
         'type': 2,
-        'data': [provs_data, citys_data, dists_data]
+        'data': [provs_data, citys_data, dists_data],
+        'successCallBack':function(value,valueTo){
+            console.log(value);
+            console.log(valueTo);
+        }
     });
     </script>
 </body>
