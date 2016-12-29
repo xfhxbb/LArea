@@ -1,3 +1,18 @@
+/**
+ * LArea移动端城市选择控件
+ * 
+ * version:1.7.2
+ * 
+ * author:黄磊
+ * 
+ * git:https://github.com/xfhxbb/LArea
+ * 
+ * Copyright 2016
+ * 
+ * Licensed under MIT
+ * 
+ * 最近修改于： 2016-6-12 16:47:41
+ */
 .gearArea {
     font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
     font-size: 10px;
@@ -10,7 +25,8 @@
     height: 100%;
     z-index: 9900;
     overflow: hidden;
-    animation-fill-mode: both
+    -webkit-animation-fill-mode: both;
+            animation-fill-mode: both
 }
 
 .area_ctrl {
@@ -25,23 +41,41 @@
     bottom: 0;
     z-index: 9901;
     overflow: hidden;
-    transform: translate3d(0, 0, 0)
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0)
 }
 
 .slideInUp {
-    animation: slideInUp .3s;
+    -webkit-animation: slideInUp .3s;
+            animation: slideInUp .3s;
+}
+
+@-webkit-keyframes slideInUp {
+    from {
+        -webkit-transform: translate3d(0, 100%, 0);
+                transform: translate3d(0, 100%, 0)
+    }
+    to {
+        -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0)
+    }
 }
 
 @keyframes slideInUp {
     from {
-        transform: translate3d(0, 100%, 0)
+        -webkit-transform: translate3d(0, 100%, 0);
+                transform: translate3d(0, 100%, 0)
     }
     to {
-        transform: translate3d(0, 0, 0)
+        -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0)
     }
 }
 
 .area_roll {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
     display: flex;
     width: 100%;
     height: auto;
@@ -58,7 +92,10 @@
     background-color: transparent;
     position: relative;
     overflow: hidden;
-    flex: 1
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+        -ms-flex: 1;
+            flex: 1
 }
 
 .area_roll>div .gear {
@@ -108,13 +145,23 @@
     display: block;
     background-color: #96979b;
     z-index: 15;
-    transform: scaleY(0.33)
+    -webkit-transform: scaleY(0.33);
+            transform: scaleY(0.33)
 }
 
 .area_btn_box {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
     display: flex;
-    justify-content:space-between;
-    align-items: stretch;
+    -webkit-box-pack:justify;
+    -webkit-justify-content:space-between;
+        -ms-flex-pack:justify;
+            justify-content:space-between;
+    -webkit-box-align: stretch;
+    -webkit-align-items: stretch;
+        -ms-flex-align: stretch;
+            align-items: stretch;
     background-color: #f1f2f4;
     position: relative
 }
@@ -122,21 +169,30 @@
 .area_btn_box:before {
     left: 0;
     top: 0;
-    transform-origin: 50% 20%
+    -webkit-transform-origin: 50% 20%;
+            transform-origin: 50% 20%
 }
 
 .area_btn_box:after {
     left: 0;
     bottom: 0;
-    transform-origin: 50% 70%
+    -webkit-transform-origin: 50% 70%;
+            transform-origin: 50% 70%
 }
 
 .tooth {
     height: 2em;
     line-height: 2em;
     text-align: center;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
     display: flex;
     line-clamp: 1;
-    flex-direction:column;
+    -webkit-box-orient:vertical;
+    -webkit-box-direction:normal;
+    -webkit-flex-direction:column;
+        -ms-flex-direction:column;
+            flex-direction:column;
     overflow: hidden
 }
