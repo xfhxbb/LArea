@@ -15,7 +15,7 @@
  *
  * author: Nutlee
  *
- * 最近修改于： 2016-8-30
+ * 最近修改于： 2016-12-29
  */
 window.LArea = (function() {
     var MobileArea = function() {
