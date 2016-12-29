@@ -81,10 +81,14 @@
             name: 'name'
         }, //绑定数据源相关字段 id对应valueTo的value属性输出 name对应trigger的value属性输出
         'type': 1, //数据源类型
+        'displayType': 2,
         'data': LAreaData, //数据源
-        'successCallBack':function(value,valueTo){
-            console.log(value);
-            console.log(valueTo);
+        'onSuccess':function(value,valueTo){
+            console.log('value',value);
+            console.log('valueTo',valueTo);
+        },
+        onClose: function() {
+            console.log('窗口关闭了');
         }
     });
     area1.value=[1,13,3];//控制初始位置，注意：该方法并不会影响到input的value
@@ -97,10 +101,14 @@
             name: 'text'
         },
         'type': 2,
+        'displayType': 2,
         'data': [provs_data, citys_data, dists_data],
-        'successCallBack':function(value,valueTo){
-            console.log(value);
-            console.log(valueTo);
+        'onSuccess':function(value,valueTo){
+            console.log('value',value);
+            console.log('valueTo',valueTo);
+        },
+        onClose: function() {
+            console.log('窗口关闭了');
         }
     });
     </script>
