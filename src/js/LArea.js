@@ -4,6 +4,7 @@ window.LArea = (function() {
         this.data;
         this.index = 0;
         this.value = [0, 0, 0];
+        this.roolStop=true;
     }
     MobileArea.prototype = {
         init: function(params) {
@@ -115,6 +116,9 @@ window.LArea = (function() {
             }
             //触摸开始
             function gearTouchStart(e) {
+                if(!_self.rollStop){
+                    return;
+                }
                 e.preventDefault();
                 var target = e.target;
                 while (true) {
@@ -137,6 +141,9 @@ window.LArea = (function() {
             }
             //手指移动
             function gearTouchMove(e) {
+                if(!_self.rollStop){
+                    return;
+                }
                 e.preventDefault();
                 var target = e.target;
                 while (true) {
@@ -158,6 +165,9 @@ window.LArea = (function() {
             }
             //离开屏幕
             function gearTouchEnd(e) {
+                if(!_self.rollStop){
+                    return;
+                }
                 e.preventDefault();
                 var target = e.target;
                 while (true) {
@@ -186,9 +196,11 @@ window.LArea = (function() {
             function rollGear(target) {
                 var d = 0;
                 var stopGear = false;
+                _self.rollStop=false;
                 function setDuration() {
                     target.style.webkitTransitionDuration = target.style.transitionDuration = '200ms';
                     stopGear = true;
+                    _self.rollStop=true;
                 }
                 clearInterval(target["int_" + target.id]);
                 target["int_" + target.id] = setInterval(function() {
