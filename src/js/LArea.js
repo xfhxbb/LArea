@@ -4,7 +4,7 @@ window.LArea = (function() {
         this.data;
         this.index = 0;
         this.value = [0, 0, 0];
-        this.roolStop=true;
+        this.rollStop=true;
     }
     MobileArea.prototype = {
         init: function(params) {
