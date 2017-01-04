@@ -279,6 +279,10 @@ window.LArea = (function() {
             }
             gearChild[_self.index].setAttribute('data-len', l);
             if (l > 0) {
+                if(!item[gearVal]){
+                   gearVal=0;
+                   gearChild[_self.index].setAttribute('val', 0);
+                }
                 var id = item[gearVal][this.keys['id']];
                 var childData;
                 switch (_self.type) {
