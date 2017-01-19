@@ -168,6 +168,7 @@ window.LArea = (function() {
                     }
                 }
                 var flag = (target["new_" + target.id] - target["old_" + target.id]) / (target["n_t_" + target.id] - target["o_t_" + target.id]);
+                flag = isNaN(flag) ? 0.001 : flag;
                 if (Math.abs(flag) <= 0.2) {
                     target["spd_" + target.id] = (flag < 0 ? -0.08 : 0.08);
                 } else {
