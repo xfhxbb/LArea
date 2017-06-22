@@ -19,7 +19,9 @@ window.LArea = (function() {
         this.data;
         this.index = 0;
         this.value = [0, 0, 0];
-    }
+        this.idvalue = ['', '', ''];
+        this.textvalue = ['', '', ''];
+    };
     MobileArea.prototype = {
         init: function(params) {
             this.params = params;
@@ -53,9 +55,9 @@ window.LArea = (function() {
                         _self.data = responseData.data;
                         if (callback) {
                             callback()
-                        };
+                        }
                     }
-                }
+                };
                 xhr.send();
             }
         },
@@ -115,9 +117,59 @@ window.LArea = (function() {
             }
             //初始化插件默认值
             function areaCtrlInit() {
-                _self.gearArea.querySelector(".area_province").setAttribute("val", _self.value[0]);
-                _self.gearArea.querySelector(".area_city").setAttribute("val", _self.value[1]);
-                _self.gearArea.querySelector(".area_county").setAttribute("val", _self.value[2]);
+                _self.gearArea.querySelector(".area_province").setAttribute("val", '0');
+                _self.gearArea.querySelector(".area_city").setAttribute("val", '0');
+                _self.gearArea.querySelector(".area_county").setAttribute("val", '0');
+                if (_self.value[0] > 0) {
+                    _self.gearArea.querySelector(".area_province").setAttribute("val", _self.value[0]);
+                    _self.gearArea.querySelector(".area_city").setAttribute("val", _self.value[1]);
+                    _self.gearArea.querySelector(".area_county").setAttribute("val", _self.value[2]);
+                } else if (_self.idvalue[0] != '') {
+                    try {
+                        $.each(_self.data, function(pi, p) {
+                            if (p['id'] == _self.idvalue[0]) {
+                                _self.gearArea.querySelector(".area_province").setAttribute("val", pi);
+                                $.each(p['child'], function(ci, c) {
+                                    if (c['id'] == _self.idvalue[1]) {
+                                        _self.gearArea.querySelector(".area_city").setAttribute("val", ci);
+                                        $.each(c['child'], function(ai, a) {
+                                            if (a['id'] == _self.idvalue[2]) {
+                                                _self.gearArea.querySelector(".area_county").setAttribute("val", ai);
+                                                return false;
+                                            }
+                                        });
+                                        return false;
+                                    }
+                                });
+                                return false;
+                            }
+                        });
+                    } catch (e) {
+                    }
+                } else if (_self.textvalue[0] != '') {
+                    try {
+                        $.each(_self.data, function(pi, p) {
+                            if (p['name'] == _self.textvalue[0]) {
+                                _self.gearArea.querySelector(".area_province").setAttribute("val", pi);
+                                $.each(p['child'], function(ci, c) {
+                                    if (c['name'] == _self.textvalue[1]) {
+                                        _self.gearArea.querySelector(".area_city").setAttribute("val", ci);
+                                        $.each(c['child'], function(ai, a) {
+                                            if (a['name'] == _self.textvalue[2]) {
+                                                _self.gearArea.querySelector(".area_county").setAttribute("val", ai);
+                                                return false;
+                                            }
+                                        });
+                                        return false;
+                                    }
+                                });
+                                return false;
+                            }
+                        });
+                    } catch (e) {
+                    }
+                } else {
+                }
 
                 switch (_self.type) {
                     case 1:
@@ -169,7 +221,7 @@ window.LArea = (function() {
                 target.setAttribute('top', target["pos_" + target.id] + 'em');
                 if(e.targetTouches[0].screenY<1){
                     gearTouchEnd(e);
-                };
+                }
             }
             //离开屏幕
             function gearTouchEnd(e) {
@@ -211,8 +263,7 @@ window.LArea = (function() {
                     var speed = target["spd_" + target.id] * Math.exp(-0.03 * d);
                     pos += speed;
                     if (Math.abs(speed) > 0.1) {} else {
-                        var b = Math.round(pos / 2) * 2;
-                        pos = b;
+                        pos = Math.round(pos / 2) * 2;
                         setDuration();
                     }
                     if (pos > 0) {
@@ -257,7 +308,7 @@ window.LArea = (function() {
                                     childData = nextData[i];
                                     break;
                                  }
-                             };
+                             }
                         _self.index=2;
                         _self.setGearTooth(childData);
                              break;
@@ -286,21 +337,21 @@ window.LArea = (function() {
                 var childData;
                 switch (_self.type) {
                     case 1:
-                    childData = item[gearVal].child
+                    childData = item[gearVal].child;
                         break;
                     case 2:
-                     var nextData= _self.data[_self.index+1] 
+                     var nextData= _self.data[_self.index+1];
                      for (var i in nextData) {
                          if(i==id){
                             childData = nextData[i];
                             break;
                          }
-                     };
-                        break;
+                     }
+                     break;
                 }
                 var itemStr = "";
                 for (var i = 0; i < l; i++) {
-                    itemStr += "<div class='tooth'  ref='" + item[i][this.keys['id']] + "'>" + item[i][this.keys['name']] + "</div>";
+                    itemStr += "<div class='tooth' ref='" + item[i][this.keys['id']] + "'>" + item[i][this.keys['name']] + "</div>";
                 }
                 gearChild[_self.index].innerHTML = itemStr;
                 gearChild[_self.index].style["-webkit-transform"] = 'translate3d(0,' + (-gearVal * 2) + 'em,0)';
@@ -338,6 +389,8 @@ window.LArea = (function() {
             var countyCode = area_county.childNodes[countyVal].getAttribute('ref');
             _self.trigger.value = provinceText + ((cityText)?(',' + cityText):(''))+ ((countyText)?(',' + countyText):(''));
             _self.value = [provinceVal, cityVal, countyVal];
+            _self.idvalue = [provinceCode, cityCode, countyCode];
+            _self.textvalue = [provinceText, cityText, countyText];
             if(this.valueTo){
                 this.valueTo.value= provinceCode +((cityCode)?(',' + cityCode):('')) + ((countyCode)?(',' + countyCode):(''));
             }
@@ -351,6 +404,6 @@ window.LArea = (function() {
             document.body.removeChild(_self.gearArea);
             _self.gearArea=null;
         }
-    }
+    };
     return MobileArea;
-})()
+})();
