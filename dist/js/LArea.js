@@ -209,6 +209,7 @@ window.LArea = (function() {
                 target["int_" + target.id] = setInterval(function() {
                     var pos = target["pos_" + target.id];
                     var speed = target["spd_" + target.id] * Math.exp(-0.03 * d);
+                    if(isNaN(speed)){speed=0;}
                     pos += speed;
                     if (Math.abs(speed) > 0.1) {} else {
                         var b = Math.round(pos / 2) * 2;
