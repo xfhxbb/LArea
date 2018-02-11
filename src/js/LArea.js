@@ -1,3 +1,18 @@
+/**
+ * LArea移动端城市选择控件
+ * 
+ * version:1.7.2
+ * 
+ * author:黄磊
+ * 
+ * git:https://github.com/xfhxbb/LArea
+ * 
+ * Copyright 2016
+ * 
+ * Licensed under MIT
+ * 
+ * 最近修改于： 2016-6-12 16:47:41
+ */
 window.LArea = (function() {
     var MobileArea = function() {
         this.gearArea;
@@ -78,11 +93,11 @@ window.LArea = (function() {
                 document.body.appendChild(_self.gearArea);
                 areaCtrlInit();
                 var larea_cancel = _self.gearArea.querySelector(".larea_cancel");
-                larea_cancel.addEventListener('touchstart', function(e) {
+                larea_cancel.addEventListener('click', function(e) {
                     _self.close(e);
                 });
                 var larea_finish = _self.gearArea.querySelector(".larea_finish");
-                larea_finish.addEventListener('touchstart', function(e) {
+                larea_finish.addEventListener('click', function(e) {
                     _self.finish(e);
                 });
                 var area_province = _self.gearArea.querySelector(".area_province");
@@ -97,6 +112,17 @@ window.LArea = (function() {
                 area_province.addEventListener('touchend', gearTouchEnd);
                 area_city.addEventListener('touchend', gearTouchEnd);
                 area_county.addEventListener('touchend', gearTouchEnd);
+                
+                
+                area_province.addEventListener('mousedown', gearTouchStart);
+                area_city.addEventListener('mousedown', gearTouchStart);
+                area_county.addEventListener('mousedown', gearTouchStart);
+                area_province.addEventListener('mousemove', gearTouchMove);
+                area_city.addEventListener('mousemove', gearTouchMove);
+                area_county.addEventListener('mousemove', gearTouchMove);
+                area_province.addEventListener('mouseup', gearTouchEnd);
+                area_city.addEventListener('mouseup', gearTouchEnd);
+                area_county.addEventListener('mouseup', gearTouchEnd);
             }
             //初始化插件默认值
             function areaCtrlInit() {
@@ -124,8 +150,15 @@ window.LArea = (function() {
                         break
                     }
                 }
+                var touchesObj=e;
+                if(touchesObj.type.indexOf("touch") != -1){
+                    touchesObj=e.targetTouches[0];
+                }else{
+                    if(e.which!=1)return;
+                }
+                console.log(touchesObj);
                 clearInterval(target["int_" + target.id]);
-                target["old_" + target.id] = e.targetTouches[0].screenY;
+                target["old_" + target.id] = touchesObj.screenY;
                 target["o_t_" + target.id] = (new Date()).getTime();
                 var top = target.getAttribute('top');
                 if (top) {
@@ -137,6 +170,7 @@ window.LArea = (function() {
             }
             //手指移动
             function gearTouchMove(e) {
+                
                 e.preventDefault();
                 var target = e.target;
                 while (true) {
@@ -146,13 +180,20 @@ window.LArea = (function() {
                         break
                     }
                 }
-                target["new_" + target.id] = e.targetTouches[0].screenY;
+                
+                var touchesObj=e;
+                if(touchesObj.type.indexOf("touch") != -1){
+                    touchesObj=e.targetTouches[0];
+                }else{
+                    if(e.which!=1)return;
+                }
+                target["new_" + target.id] = touchesObj.screenY;
                 target["n_t_" + target.id] = (new Date()).getTime();
                 var f = (target["new_" + target.id] - target["old_" + target.id]) * 30 / window.innerHeight;
                 target["pos_" + target.id] = target["o_d_" + target.id] + f;
                 target.style["-webkit-transform"] = 'translate3d(0,' + target["pos_" + target.id] + 'em,0)';
                 target.setAttribute('top', target["pos_" + target.id] + 'em');
-                if(e.targetTouches[0].screenY<1){
+                if(touchesObj.screenY<1){
                     gearTouchEnd(e);
                 };
             }
@@ -334,6 +375,7 @@ window.LArea = (function() {
             var evt = new CustomEvent('input');
             _self.trigger.dispatchEvent(evt);
             document.body.removeChild(_self.gearArea);
+            _self.gearArea=null;
         }
     }
     return MobileArea;
